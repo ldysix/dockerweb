@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>createcontainer</title>
+    <script type="text/javascript" src="/static/jquery-3.1.1.min.js"></script>
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/static/bootstrap.min.js"></script>
+</head>
+<body>
+创建容器<br/>
+<div>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="firstname" class="col-sm-2 control-label">容器的名称</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="rqmc" placeholder="输入容器名称" style="width: 200px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="col-sm-2 control-label">容器的hostname</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="rqzjm" placeholder="输入hostname" style="width: 200px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="firstname" class="col-sm-2 control-label">网络连接类型</label>
+        <div class="col-sm-10" id="wlpz">
+            <input type="radio" name="wlljlx" id="bfs" value="1" checked/>bridge方式
+            <input type="radio" name="wlljlx" id="nfs" value="2"/>none方式
+            <input type="radio" name="wlljlx" id="hfs" value="3"/>host方式
+            <input type="radio" name="wlljlx" id="cfyfs" value="4"/>container复用方式
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="firstname" class="col-sm-2 control-label">标准输入输出内容类型</label>
+        <div class="col-sm-10" id="srsclx">
+            <input type="radio" name="bzsrscnrlx" id="stdin" value="1" checked/>STDIN
+            <input type="radio" name="bzsrscnrlx" id="stdout" value="2" />STDOUT
+            <input type="radio" name="bzsrscnrlx" id="stderr" value="3" />STDERR
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="col-sm-2 control-label">容器使用的DNS服务器</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="rqdnsfwq" placeholder="输入DNS服务器" style="width: 200px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="col-sm-2 control-label">容器DNS搜索域名</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="rqdnsssym" placeholder="输入DNS搜索域名" style="width: 200px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="col-sm-2 control-label">开放端口</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="szjdk" placeholder="输入宿主机的端口" style="width: 200px">
+            <input type="text" class="form-control" id="rqdk" placeholder="输入容器的端口" style="width: 200px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="col-sm-2 control-label">镜像名</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="jxm" placeholder="输入镜像名" style="width: 200px">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" onclick="createContainer()">创建</button>
+            <button type="submit" class="btn btn-default">重置</button>
+        </div>
+    </div>
+</form>
+</div>
+
+<div id="show">
+</div>
+</body>
+
+<script  type="text/javascript" language="javascript">
+function createContainer() {
+    var rqmc=document.getElementById("rqmc").value;
+    console.log("rqmc="+rqmc);
+    var rqzjm=document.getElementById("rqzjm").value;
+    var wlpz=$('#wlpz input[name="wlljlx"]:checked').val().toString();
+    var srsclx=$('#srsclx input[name="bzsrscnrlx"]:checked').val().toString();
+    var rqdnsfwq=document.getElementById("rqdnsfwq").value;
+    var rqdnsssym=document.getElementById("rqdnsssym").value;
+    var szjdk=document.getElementById("szjdk").value;
+    var rqdk=document.getElementById("rqdk").value;
+    var jxm=document.getElementById("jxm").value;
+    console.log("jxm="+jxm);
+    var f_data={
+        "rqmc":rqmc,
+        "rqzjm":rqzjm,
+        "wlpz":wlpz,
+        "scsclx":srsclx,
+        "rqdnsfwq":rqdnsfwq,
+        "rqdnsssym":rqdnsssym,
+        "szjdk":szjdk,
+        "rqdk":rqdk,
+        "jxm":jxm
+    };
+    if (jxm) {
+        $.ajax({
+            url: "execcreatecontainer",
+            type: "GET",
+            data: f_data,
+            async:false,
+            success: function (data) {
+                //data = JSON.parse(data);
+                //var str=data["rst"].toString();
+                //var strs=str.split(",");
+                //var html="";
+                //for(var i=0;i<strs.length;i++) {
+                  //  html = html + strs[i] + "<br/>";
+                //}
+                //$("#show").html(html);
+                alert("容器创建成功");
+            },
+            error: function (data) {
+                alert("error");
+            },
+        });
+    }
+}    
+
+</script>
+</html>

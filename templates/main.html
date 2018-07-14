@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+    <script type="text/javascript" src="/static/jquery-3.1.1.min.js"></script>
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/static/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div style="width: 80px;height: 500px; float: left; "></div>
+    <div style="width: 600px;float: left;" >
+    <div style="width: 65%;margin: 0 auto; ">
+        <form id="dockerczf">
+            请选择系统版本:
+            <input type="radio" name="xtbb" value="1" checked/>ubuntu
+            <input type="radio" name="xtbb" value="2" />centos6及以下
+            <input type="radio" name="xtbb" value="3" />centos7及以上
+        </form>
+    </div>
+    <!--版本信息-->
+    <div style="width: 60%;margin: 0 auto; ">
+    <div class="btn-group">
+        <div class="btn-group" id="bbxx">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                版本信息
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><button type="button" id="jdbbxx" class="btn btn-default" onclick="showVersion(1)">简单版本信息</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="xxbbxx" class="btn btn-default" onclick="showVersion(2)">详细版本信息</button></li>
+            </ul>
+        </div>
+    </div>
+    <!--docker操作-->
+    <div class="btn-group">
+        <div class="btn-group" id="dockercz">
+
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                docker操作
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><button type="button" id="qd" class="btn btn-default" onclick="execDocker(1)">启动</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="tz" class="btn btn-default" onclick="execDocker(2)">停止</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="cq" class="btn btn-default" onclick="execDocker(3)">重启</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="zt" class="btn btn-default" onclick="execDocker(4)">状态</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="xxxx" class="btn btn-default" onclick="execDocker(5)">详细信息</button></li>
+            </ul>
+        </div>
+    </div>
+    <!--镜像-->
+    <div class="btn-group">
+        <div class="btn-group" id="jx">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                镜像
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><button type="button" id="ckjx" class="btn btn-default" onclick="execImages(1)">查看镜像</button></li>
+                <li class="divider"></li>
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="sqjx" onclick="execImages(2)">
+							        删除镜像
+						            </button>
+					            </span>
+                                <input type="text"  class="form-control" id="sqjxv" style="width: 200px">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="lqjx" onclick="execImages(3)">
+                                        拉取镜像
+						            </button>
+					            </span>
+                                <input type="text" class="form-control" id="lqjxv" style="width: 200px">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="scjx" onclick="execImages(4)">
+							        上传镜像
+						            </button>
+					            </span>
+                                <input type="text" class="form-control" id="scjxv" style="width: 200px">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="czjx" onclick="execImages(5)">
+                                        查找镜像
+						            </button>
+					            </span>
+                                <input type="text" class="form-control" id="czjxv" style="width: 200px">
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                </form>
+            </ul>
+        </div>
+    </div>
+
+    <!--容器-->
+    <div class="btn-group">
+        <div class="btn-group" id="bbxx">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                容器
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><button type="button" id="ckqbrq" class="btn btn-default" onclick="execContainer(1)">查看全部容器</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="ckyxrq" class="btn btn-default" onclick="execContainer(2)">查看运行容器</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="sqqurq" class="btn btn-default" onclick="execContainer(3)">删除全部容器</button></li>
+                <li class="divider"></li>
+                <li><button type="button" id="cjrqabz" class="btn btn-default" onclick="execContainer(4)">创建容器（按步骤）</button></li>
+                <li class="divider"></li>
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="cjrqmr" onclick="execContainer(5)">
+							        创建容器（默认）
+						            </button>
+					            </span>
+                                <input type="text"  class="form-control" id="cjrqmrv" style="width: 200px">
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="cjrqzj" onclick="execContainer(6)">
+							        创建容器（自己）
+						            </button>
+					            </span>
+                                <input type="text"  class="form-control" id="cjrqzjv" style="width: 200px">
+                            </div>
+                        </div>
+                            <br/><br/>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="zcsqrq" onclick="execContainer(7)">
+							        正常删除容器
+						            </button>
+					            </span>
+                                    <input type="text"  class="form-control" id="zcsqrqv" style="width: 200px">
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="qzsqrq" onclick="execContainer(8)">
+							        强制删除容器
+						            </button>
+					            </span>
+                                    <input type="text"  class="form-control" id="qzsqrqv" style="width: 200px">
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="qdrq" onclick="execContainer(9)">
+                                        启动容器
+						            </button>
+					            </span>
+                                    <input type="text"  class="form-control" id="qdrqv" style="width: 200px">
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="tzrq" onclick="execContainer(10)">
+							        停止容器
+						            </button>
+					            </span>
+                                    <input type="text"  class="form-control" id="tzrqv" style="width: 200px">
+                                </div>
+                            </div>
+                            <br/><br/>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+					            <span class="input-group-btn">
+						            <button class="btn btn-default" type="button" id="rqxxxx" onclick="execContainer(11)">
+							        容器详细信息
+						            </button>
+					            </span>
+                                <input type="text"  class="form-control" id="rqxxxxv" style="width: 200px">
+                            </div>
+                        </div>
+                        <br/><br/>
+                    </div>
+                </form>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div style="width:100%;height: 550px;margin: 0 auto; background-color: #d0d0d0; border-style: solid" >
+        <div style="text-align:center">
+            <font size="5" face="arial" color="black">结果显示如下</font>
+        </div>
+        <hr/>
+        <div id="show" style="width:100%;height: 470px;margin: 0 auto; background-color: #d0d0d0;overflow-y:auto; overflow-x:auto;">
+
+        </div>
+    </div>
+    </div>
+    <div style="width: 50px;height: 500px; float: left; "></div>
+    <!--展示指令执行结果的地方-->
+    <!--右边指令-->
+    <div id="zl" style="width: 550px;height: 610px;float:left; ">
+        <div style="height: 55px;" ></div>
+        <div style="border-style: solid;">
+            <hr/>
+            <div style="width: 1000px;" >
+                <div class="col-lg-6">
+                    <div class="input-group" id="srzl">
+                        <input type="text" class="form-control" id="srzlv">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="execInputCommand()">输入指令并点击执行</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <hr/>
+            <div style="height: 443px">
+                <div id="showzljg" style="margin:0 auto;width: 520px ;height: 440px;overflow-y:auto; overflow-x:auto;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+</body>
+
+<script  type="text/javascript" language="javascript">
+/*
+版本信息
+ */
+function showVersion(flag) {
+    var f_data={
+        "flag":flag
+    };
+    $.ajax({
+        url:"showversion",
+        type:"GET",
+        data:f_data,
+        success: function (data) {
+            data=JSON.parse(data);
+            var str=data["rst"].toString();
+            var strs=str.split(",");
+            var html="";
+            for(var i=0;i<strs.length;i++) {
+                html = html + strs[i] + "<br/>";
+            }
+            $("#show").html(html);
+        },
+        error:function (data) {
+            alert("error");
+        },
+    });
+}
+
+/*
+docker操作
+ */
+function execDocker(flag) {
+    var xtbb=$('#dockerczf input[name="xtbb"]:checked').val().toString();
+    var f_data={
+        "flag":flag.toString(),
+        "xtbb":xtbb
+    };
+    $.ajax({
+        url:"execdocker",
+        type:"GET",
+        data:f_data,
+        success:function (data) {
+            data=JSON.parse(data);
+            var str=data["rst"].toString();
+            var strs=str.split(",");
+            var html="";
+            for(var i=0;i<strs.length;i++) {
+                html = html + strs[i] + "<br/>";
+            }
+            $("#show").html(html);
+        },
+        error:function (data) {
+            alert("error");
+        }
+    });
+}
+
+/*
+镜像
+ */
+function execImages(flag) {
+   var f=flag;
+   var f_data={};
+   var inputV=null;
+   //console.log("f="+f);
+   if (f=="1"){
+       inputV="1";
+       f_data={
+         "flag":flag.toString(),
+           "str":inputV
+       };
+   }else  if (f=="2"){
+        inputV=document.getElementById("sqjxv").value;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV.toString()
+        };
+   }else if (f=="3"){
+       inputV=document.getElementById("lqjxv").value;
+       console.log("inputV="+inputV);
+       f_data={
+           "flag":flag.toString(),
+           "str":inputV.toString()
+       };
+   }else if (f=="4"){
+       inputV=document.getElementById("scjxv").value;
+       f_data={
+           "flag":flag.toString(),
+           "str":inputV.toString()
+       };
+   }else if (f=="5"){
+       inputV=document.getElementById("czjxv").value;
+       f_data={
+           "flag":flag.toString(),
+           "str":inputV.toString()
+       };
+   }
+   //console.log("inputv="+inputV);
+   if(inputV!=null&&inputV!="") {
+       $.ajax({
+           url: "execimages",
+           type: "GET",
+           data: f_data,
+           success: function (data) {
+               data = JSON.parse(data);
+               var str = data["rst"].toString();
+               var strs = str.split(",");
+               var html = "";
+               for (var i = 0; i < strs.length; i++) {
+                   html = html + strs[i] + "<br/>";
+               }
+               $("#show").html(html);
+           },
+           error: function (data) {
+               alert("error");
+           },
+       });
+   }
+}
+/*
+容器
+ */
+function execContainer(flag) {
+    var f=flag;
+    var f_data={};
+    var fg=1;
+    var inputV=null;
+    if (f=="1"){
+        fg=1;
+        inputV=flag.toString();
+        f_data= {
+            "flag": flag.toString(),
+            "str": inputV
+        };
+    }else if (f=="2"){
+        fg=1;
+        inputV=flag.toString();
+        f_data={
+          "flag":flag.toString(),
+          "str":inputV
+        };
+    }else if (f=="3"){
+        fg=1;
+        inputV=flag;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV
+        };
+    }else if (f=="4"){
+        fg=0;
+       // top.location='createcontainer';
+        window.open("createcontainer");
+    }else if (f=="5"){
+        fg=1;
+        inputV=document.getElementById("cjrqmrv").value;
+        f_data={
+          "flag":flag.toString(),
+          "str":inputV.toString()
+        };
+    }else if (f=="6"){
+        fg=1;
+        inputV=document.getElementById("cjrqzjv").value;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV.toString()
+        };
+    }else if (f=="7"){
+        fg=1;
+        inputV=document.getElementById("zcsqrqv").value;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV.toString()
+        };
+    }else if (f=="8"){
+        fg=1;
+        inputV=document.getElementById("qzsqrqv").value;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV.toString()
+        };
+    }else if (f=="9"){
+        fg=1;
+        inputV=document.getElementById("qdrqv").value;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV.toString()
+        };
+    }else if (f=="10"){
+        fg=1;
+        inputV=document.getElementById("tzrqv").value;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV.toString()
+        };
+    }else if (f=="11"){
+        fg=1;
+        inputV=document.getElementById("rqxxxxv").value;
+        f_data={
+            "flag":flag.toString(),
+            "str":inputV.toString()
+        };
+    }
+    if(fg==1&&inputV!=null&&inputV!=""){
+        $.ajax({
+            url:"execcontainer",
+            type:"GET",
+            data:f_data,
+            success: function (data) {
+                data=JSON.parse(data);
+                var str=data["rst"].toString();
+                var strs=str.split(",");
+                var html="";
+                for(var i=0;i<strs.length;i++) {
+                    html = html + strs[i] + "<br/>";
+                }
+                $("#show").html(html);
+            },
+            error:function (data) {
+                alert("error");
+            },
+        });
+    }
+}
+
+/*
+输入指令
+ */
+function execInputCommand() {
+    var inputV=document.getElementById("srzlv").value;
+    var f_data={
+      "srzl":inputV
+    };
+    if(inputV!=null&&inputV!=""){
+        $.ajax({
+            url:"execinputcommand",
+            type:"GET",
+            data:f_data,
+            success:function (data) {
+                data=JSON.parse(data);
+                var str=data["rst"].toString();
+                var strs=str.split(",");
+                var html="";
+                for(var i=0;i<strs.length;i++) {
+                    html = html + strs[i] + "<br/>";
+                }
+                $("#showzljg").html(html);
+            },
+            error:function (data) {
+              alert("error");
+            },
+        });
+
+    }
+}
+</script>
+
+</html>
+
